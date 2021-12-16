@@ -38,6 +38,10 @@ class SignUp extends Component {
     errorMsg: '',
     name: '',
     number: '',
+    emptyName: false,
+    emptyMail: false,
+    emptyPassword: false,
+    emptyContact: false,
   }
 
   onUserNameEntered = event => {
@@ -69,13 +73,49 @@ class SignUp extends Component {
     this.setState({name: event.target.value})
   }
 
+  onNameBlur = event => {
+    const name = event.target.value
+    if (name === '') {
+      this.setState({emptyName: true})
+    } else {
+      this.setState({emptyName: false})
+    }
+  }
+
+  onEmailBlur = event => {
+    const name = event.target.value
+    if (name === '') {
+      this.setState({emptyMail: true})
+    } else {
+      this.setState({emptyMail: false})
+    }
+  }
+
+  onPasswordBlur = event => {
+    const name = event.target.value
+    if (name === '') {
+      this.setState({emptyPassword: true})
+    } else {
+      this.setState({emptyPassword: false})
+    }
+  }
+
+  onContactBlur = event => {
+    const name = event.target.value
+    if (name === '') {
+      this.setState({emptyContact: true})
+    } else {
+      this.setState({emptyContact: false})
+    }
+  }
+
   onSignIn = async event => {
     event.preventDefault()
     const {username, password, name, number} = this.state
     const userDetails = {
       user_firstname: name,
-      user_phone: number,
       user_email: username,
+      user_phone: number,
       user_password: password,
     }
     const url = 'https://snapkaro.com/eazyrooms_staging/api/user_registeration'
@@ -102,6 +142,10 @@ class SignUp extends Component {
       errorMsg,
       name,
       number,
+      emptyContact,
+      emptyMail,
+      emptyName,
+      emptyPassword,
     } = this.state
     const passwordState = showPassword ? 'text' : 'password'
 
@@ -127,6 +171,8 @@ class SignUp extends Component {
               placeholder="Enter Full name"
               onChange={this.onNameEntered}
               value={name}
+              onBlur={this.onNameBlur}
+              empty={emptyName}
             />
           </InputContainer>
           <InputContainer>
@@ -137,17 +183,20 @@ class SignUp extends Component {
               placeholder="Enter Email"
               onChange={this.onUserNameEntered}
               value={username}
+              onBlur={this.onEmailBlur}
+              empty={emptyMail}
             />
           </InputContainer>
           <InputContainer2>
             <Label htmlFor="password">Password*</Label>
-            <PasswordContainer>
+            <PasswordContainer empty={emptyPassword}>
               <Input2
                 type={passwordState}
                 id="password"
                 placeholder="Enter Password"
                 onChange={this.onPasswordEntered}
                 value={password}
+                onBlur={this.onPasswordBlur}
               />
               <IconButton type="button" onClick={this.onShowPassword}>
                 <BsFillEyeFill color="#45474a" />
@@ -162,6 +211,8 @@ class SignUp extends Component {
               placeholder="Enter Contact number"
               onChange={this.onNumberEntered}
               value={number}
+              onBlur={this.onContactBlur}
+              empty={emptyContact}
             />
           </InputContainer>
           <CheckBoxAndForgetPasswordContainer>

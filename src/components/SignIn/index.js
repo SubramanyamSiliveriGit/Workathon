@@ -36,6 +36,8 @@ class Login extends Component {
     showPassword: false,
     showError: false,
     errorMsg: '',
+    emailEmpty: false,
+    passwordEmpty: false,
   }
 
   onUserNameEntered = event => {
@@ -59,6 +61,24 @@ class Login extends Component {
     this.setState({showError: true, errorMsg: msg})
   }
 
+  emailBlur = event => {
+    const gmail = event.target.value
+    if (gmail === '') {
+      this.setState({emailEmpty: true})
+    } else {
+      this.setState({emailEmpty: false})
+    }
+  }
+
+  onPasswordBlur = event => {
+    const password = event.target.value
+    if (password === '') {
+      this.setState({passwordEmpty: true})
+    } else {
+      this.setState({passwordEmpty: false})
+    }
+  }
+
   onSignIn = async event => {
     event.preventDefault()
     const {username, password} = this.state
@@ -73,7 +93,6 @@ class Login extends Component {
     }
     const response = await fetch(url, options)
     const data = await response.json()
-    console.log(data)
     if (data.status) {
       this.onSuccess()
     } else {
@@ -82,7 +101,15 @@ class Login extends Component {
   }
 
   renderForm = () => {
-    const {username, password, showPassword, showError, errorMsg} = this.state
+    const {
+      username,
+      password,
+      showPassword,
+      showError,
+      errorMsg,
+      emailEmpty,
+      passwordEmpty,
+    } = this.state
     const passwordState = showPassword ? 'text' : 'password'
 
     return (
@@ -107,17 +134,20 @@ class Login extends Component {
               placeholder="Enter Email"
               onChange={this.onUserNameEntered}
               value={username}
+              onBlur={this.emailBlur}
+              emailEmpty={emailEmpty}
             />
           </InputContainer>
           <InputContainer2>
             <Label htmlFor="password">Password*</Label>
-            <PasswordContainer>
+            <PasswordContainer passwordEmpty={passwordEmpty}>
               <Input2
                 type={passwordState}
                 id="password"
                 placeholder="Enter Password"
                 onChange={this.onPasswordEntered}
                 value={password}
+                onBlur={this.onPasswordBlur}
               />
               <IconButton type="button" onClick={this.onShowPassword}>
                 <BsFillEyeFill color="#45474a" />

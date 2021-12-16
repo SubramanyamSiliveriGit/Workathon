@@ -85,17 +85,20 @@ export const InputContainer2 = styled.div`
 
 export const PasswordContainer = styled.div`
   display: flex;
-  border: 1px solid #606363;
+  border: 1px solid;
   align-items: center;
   border-radius: 5px;
   justify-content: space-between;
   padding: 10px;
+  border-color: ${props => (props.passwordEmpty ? 'red' : '#606363')};
 `
 
 export const Input = styled.input`
   padding: 10px;
-  border: 1px solid #606363;
+  border: 1px solid;
   border-radius: 5px;
+  outline: none;
+  border-color: ${props => (props.emailEmpty ? 'red' : '#606363')};
 `
 export const Input2 = styled.input`
   border: none;
