@@ -1,6 +1,7 @@
 import {Component} from 'react'
 import {Link} from 'react-router-dom'
 import {BsFillEyeFill} from 'react-icons/bs'
+import {FiFacebook, FiTwitter, FiGithub} from 'react-icons/fi'
 
 import {
   CustomBgContainer,
@@ -25,6 +26,10 @@ import {
   SignInButton,
   IconButton,
   ErrorMessage,
+  CustomContainer2,
+  Para2,
+  IconsContainer,
+  ButtonIcon,
 } from './styledComponents'
 
 import './index.css'
@@ -100,6 +105,23 @@ class Login extends Component {
     }
   }
 
+  renderOtherLogin = () => (
+    <CustomContainer2>
+      <Para2>Or continue with</Para2>
+      <IconsContainer>
+        <ButtonIcon>
+          <FiFacebook size={18} color="#606363" />
+        </ButtonIcon>
+        <ButtonIcon>
+          <FiTwitter size={18} color="#606363" />
+        </ButtonIcon>
+        <ButtonIcon>
+          <FiGithub size={18} color="#606363" />
+        </ButtonIcon>
+      </IconsContainer>
+    </CustomContainer2>
+  )
+
   renderForm = () => {
     const {
       username,
@@ -164,6 +186,7 @@ class Login extends Component {
           <SignInButton type="submit">Sign In</SignInButton>
           {showError ? <ErrorMessage>{errorMsg}</ErrorMessage> : null}
         </Form>
+        {this.renderOtherLogin()}
       </FormContainer>
     )
   }

@@ -117,10 +117,17 @@ class SignUp extends Component {
       user_email: username,
       user_phone: number,
       user_password: password,
+      user_lastname: 'ni',
+      user_city: 'Hyderabad',
+      user_zipcode: '500072',
     }
     const url = 'https://snapkaro.com/eazyrooms_staging/api/user_registeration'
     const options = {
       method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
       body: JSON.stringify(userDetails),
     }
     const response = await fetch(url, options)

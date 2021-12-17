@@ -41,7 +41,7 @@ export const FormContainer = styled.div`
   padding: 24px;
   width: 100%;
   @media screen and (min-width: 768px) {
-    width: 35%;
+    width: 30%;
     padding: 42px;
   }
 `
@@ -149,4 +149,25 @@ export const ErrorMessage = styled.p`
   color: red;
   font-family: 'Roboto';
   font-size: 12px;
+`
+export const CustomContainer2 = styled.div`
+  flex-direction: column;
+  margin-top: 10px;
+`
+export const Para2 = styled.p`
+  color: #606363;
+  font-size: 16px;
+  font-family: 'Roboto';
+  display: block;
+  text-align: center;
+`
+export const IconsContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+`
+export const ButtonIcon = styled.button`
+  border: 1px solid #606363;
+  padding: 5px 35px 5px 35px;
+  background-color: transparent;
+  border-radius: 20px;
 `
